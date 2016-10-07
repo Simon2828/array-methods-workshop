@@ -144,13 +144,105 @@ function highLowTwo(arr){
     }, {highest: -Infinity, secondHighest: -Infinity, lowest: Infinity, secondLowest: Infinity });
 }
 
-console.log(highLowTwo([1,2,3,4]));
+//console.log(highLowTwo([1,2,3,4]));
 
+// Write a function called countChars that takes a string, and returns an object where the keys are letters, 
+// and the value is the number of times that letter appears.
 
+function countChars(str) {
+    var characters = str.toLowerCase().replace(" ","").split("");
+    return characters.reduce(function(obj, currentLetter) {
+        if (obj[currentLetter]) {
+                obj[currentLetter] += 1;
+        } else {
+            obj[currentLetter] = 1;
+        }
+        return obj;
+    }, {});
+}
 
+//console.log(countChars("hello world"));
 
+//For this exercise, we want to use Array.prototype.reduce to transform our array of people into an object, 
+//keyed with the unique ID.
 
+// extract value of id - next[id] and set in a variable
+// make next[id] the key of next by passing next[id]/ var id to obj, then set its value as next:
+// id-variable = next
+// return obj 
 
+function transformData(arr) {
+    return arr.reduce(function(obj, next) {
+        var id = next.id;
+        obj[id] = next;
+        return obj;
+
+    },{});
+}
+
+//console.log(transformData([
+//   {
+//     "id": "KeXoYg92is",
+//     "firstName": "John",
+//     "lastName": "Smith",
+//     "email": "john@smith.com"
+//   },
+//   {
+//     "id": "NkALmSWtUp",
+//     "firstName": "Donald",
+//     "lastName": "Duck",
+//     "email": "don@disney.com"
+//   },
+//   {
+//     "id": "m7LPbJYSUg",
+//     "firstName": "John",
+//     "lastName": "Vader",
+//     "email": "vader@darkside.com"
+//   }
+// ]));
+
+// Exercise 10
+
+// function to take in array of people
+// reduce function with (obj, next)
+// extract value of firstName - var name = obj.firstName
+// set as object property: obj[name] = next
+// if next has same obj name, obj.name push next to obj.name
+// return obj
+
+function nameIndex(arr) {
+    return arr.reduce(function(obj,next) {
+            var name = next.firstName;
+            if(!obj[name]) {
+                obj[name] = [];
+                obj[name].push(next);
+            } else {
+                obj[name].push(next)
+            }
+            return obj;
+    },{})
+}
+
+console.log(nameIndex([
+  {
+    "id": "KeXoYg92is",
+    "firstName": "John",
+    "lastName": "Smith",
+    "email": "john@smith.com"
+  },
+  {
+    "id": "NkALmSWtUp",
+    "firstName": "Donald",
+    "lastName": "Duck",
+    "email": "don@disney.com"
+  },
+  {
+    "id": "m7LPbJYSUg",
+    "firstName": "John",
+    "lastName": "Vader",
+    "email": "vader@darkside.com"
+  }
+]));
 
 
 
